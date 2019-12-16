@@ -7,6 +7,15 @@ class NoteService {
   async getAll(id) {
     return await _repository.find({ bug: id });
   }
+  async create(rawData) {
+    return await _repository.create(rawData);
+  }
+  async delete(id) {
+    let data = await _repository.findByIdAndRemove(id);
+    if (!data) {
+      throw new Error("Invalid Update Id");
+    }
+  }
 
 }
 
