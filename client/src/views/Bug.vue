@@ -6,6 +6,7 @@
     {{oneBug.description}}
     status
     {{oneBug.closed}}
+    <button @click="closeBug()">Close Bug</button>
   </div>
 </template>
 
@@ -24,6 +25,9 @@ export default {
   methods: {
     getBugById() {
       this.$store.dispatch("getBugById", this.$route.params.id);
+    },
+    closeBug() {
+      this.$store.dispatch("closeBug", this.$route.params.id);
     }
   },
   components: {},

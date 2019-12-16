@@ -50,6 +50,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
+    },
+    async closeBug({ commit, dispatch }, bugId) {
+      try {
+        let res = await api.delete('bugs/' + bugId)
+        dispatch("getBugById", bugId)
+      } catch (error) {
+        console.error(error)
+      }
     }
   },
   modules: {
