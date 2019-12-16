@@ -11,7 +11,8 @@ export default class BugController {
       .get("", this.getAll)
       .get("/:id", this.getBugByBugId)
       .post("", this.create)
-
+      .put("/:id", this.edit)
+      .delete("/:id", this.delete)
 
   }
 
@@ -37,5 +38,16 @@ export default class BugController {
       return res.send(data)
     } catch (error) { next(error) }
   }
-
+  async edit(req, res, next) {
+    try {
+      let data = await bugService.edit(req.params.id, req.body)
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
+  async delete(req, res, next) {
+    try {
+      let data = await bugService.delete(req.params.id)
+      return res.send(data)
+    } catch (error) { next(error) }
+  }
 }
