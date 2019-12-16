@@ -15,11 +15,15 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    bugs: []
+    bugs: [],
+    activeBug: {}
   },
   mutations: {
     setBugs(state, bug) {
       state.bugs = bug
+    },
+    setActiveBug(state, bug) {
+      state.activeBug = bug
     }
   },
   actions: {
@@ -35,6 +39,14 @@ export default new Vuex.Store({
       try {
         let res = await api.post('bugs', bug)
         dispatch("getBugs")
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async getBugById({ commit, dispatch }, bugId) {
+      try {
+        let res = await api.get('bugs/' + bugId)
+        commit("setActiveBug", res.data)
       } catch (error) {
         console.error(error)
       }

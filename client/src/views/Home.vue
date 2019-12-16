@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <button @click="createBug()">Report Da Bugz</button>
-    <form @submit.prevent="createBug()">
+    <button @click="showInput = !showInput">Report Da Bugz</button>
+    <form v-if="showInput" @submit.prevent="createBug()">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -56,7 +56,8 @@ export default {
   name: "home",
   data() {
     return {
-      newBug: {}
+      newBug: {},
+      showInput: false
     };
   },
   components: {
