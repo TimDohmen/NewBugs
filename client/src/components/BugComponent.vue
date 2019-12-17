@@ -4,7 +4,6 @@
     <td>{{bugProp.reportedBy}}</td>
     <td>{{this.status}}</td>
     <td>{{this.newDate}}</td>
-    <!-- <td>{{bugProp.updatedAt}}</td> -->
   </tr>
 </template>
 
