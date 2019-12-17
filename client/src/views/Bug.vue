@@ -33,7 +33,7 @@
           v-model="newNote.content"
         />
       </div>
-      <button type="submit">Craete Note</button>
+      <button type="submit">Create Note</button>
     </form>
   </div>
 </template>

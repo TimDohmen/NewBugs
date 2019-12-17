@@ -20,7 +20,7 @@ export default class BugController {
 
   async getAll(req, res, next) {
     try {
-      let data = await bugService.getAll();
+      let data = await bugService.getAll(+req.query.page);
       return res.send(data);
     } catch (error) {
       next(error);

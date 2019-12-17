@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
+    <header class="bg-secondary h-25 row">
+      <h3 class="col">Bug Tracker</h3>
+    </header>
     <button @click="showInput = !showInput">Report Da Bugz</button>
     <form v-if="showInput" @submit.prevent="createBug()">
       <div class="form-group">
@@ -45,6 +48,9 @@
       </tr>
       <BugComponent v-for="bug in bugs" :key="bug._id" :bugProp="bug" />
     </table>
+    <button @click="getBugs(--page)">Prev Page</button>
+
+    <button @click="getBugs(++page)">Next Page</button>
   </div>
 </template>
 
@@ -57,7 +63,8 @@ export default {
   data() {
     return {
       newBug: {},
-      showInput: false
+      showInput: false,
+      page: 1
     };
   },
   components: {
@@ -70,8 +77,8 @@ export default {
     }
   },
   methods: {
-    getBugs() {
-      this.$store.dispatch("getBugs");
+    getBugs(page) {
+      this.$store.dispatch("getBugs", page);
     },
     createBug() {
       this.$store.dispatch("createBug", {
@@ -82,7 +89,7 @@ export default {
     }
   },
   mounted() {
-    this.getBugs();
+    this.getBugs(1);
   }
 };
 </script>

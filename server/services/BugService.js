@@ -4,8 +4,8 @@ import Bug from "../models/Bug";
 const _repository = mongoose.model("Bug", Bug);
 
 class BugService {
-  async getAll() {
-    return await _repository.find({});
+  async getAll(skip) {
+    return await _repository.find({}).skip(skip).limit(3);
   }
   async create(rawData) {
     return await _repository.create(rawData);

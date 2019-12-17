@@ -32,9 +32,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async getBugs({ commit, dispatch }) {
+    async getBugs({ commit, dispatch }, page) {
       try {
-        let res = await api.get(`bugs`)
+        let res = await api.get(`bugs?page=` + page)
         commit("setBugs", res.data)
       } catch (error) {
         console.error(error)

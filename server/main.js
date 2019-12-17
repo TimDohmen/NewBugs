@@ -34,6 +34,9 @@ server.use(bp.json());
 
 //NOTE next we want to register all our routes(doorways that can be accessed in our app)
 
+
+
+
 //NOTE we have to import access to our controllers
 import ValuesController from "./controllers/ValuesController";
 import BugsController from "./controllers/BugController";
