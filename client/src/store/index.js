@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import { createContext } from 'vm'
 
 
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     bugs: [],
-    activeBug: {}
+    activeBug: {},
+    notes: []
   },
   mutations: {
     setBugs(state, bug) {
@@ -24,6 +26,9 @@ export default new Vuex.Store({
     },
     setActiveBug(state, bug) {
       state.activeBug = bug
+    },
+    setNotes(state, notes) {
+      state.notes = notes
     }
   },
   actions: {
@@ -57,6 +62,22 @@ export default new Vuex.Store({
         dispatch("getBugById", bugId)
       } catch (error) {
         console.error(error)
+      }
+    },
+    async getNotes({ commit, dispatch }, bugId) {
+      try {
+        let res = await api.get('bugs/' + bugId + '/notes')
+        commit("setNotes", res.data)
+      } catch (error) {
+
+      }
+    },
+    async createContext({ commit, dispatch }, note) {
+      try {
+        let res = await api.post('notes')
+        dispatch("getNotes", note.bug)
+      } catch (error) {
+
       }
     }
   },
