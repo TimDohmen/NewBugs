@@ -1,5 +1,6 @@
 <template>
   <div class="Bug">
+    <button @click="goHome()">goHome</button>
     Title
     {{oneBug.title}}
     <hr />
@@ -40,6 +41,8 @@
 
 
 <script>
+import router from "../router";
+
 import NoteComponent from "../components/NoteComponent";
 export default {
   name: "Bug",
@@ -63,6 +66,9 @@ export default {
     },
     getNotes() {
       this.$store.dispatch("getNotes", this.$route.params.id);
+    },
+    goHome() {
+      router.push({ path: `/` });
     },
     createNote() {
       this.$store.dispatch("createNote", {

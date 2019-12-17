@@ -5,7 +5,7 @@ const _repository = mongoose.model("Bug", Bug);
 
 class BugService {
   async getAll(skip) {
-    return await _repository.find({}).skip(skip).limit(3);
+    return await _repository.find({}).skip(skip * 3).limit(3);
   }
   async create(rawData) {
     return await _repository.create(rawData);

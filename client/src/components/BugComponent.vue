@@ -3,18 +3,26 @@
     <td>{{bugProp.title}}</td>
     <td>{{bugProp.reportedBy}}</td>
     <td>{{this.status}}</td>
-    <td>{{bugProp.updatedAt}}</td>
+    <td>{{this.newDate}}</td>
+    <!-- <td>{{bugProp.updatedAt}}</td> -->
   </tr>
 </template>
 
 
 <script>
+import moment from "moment";
 import router from "../router";
 export default {
   name: "BugComponent",
   data() {
     return {
-      status: this.bugProp.closed ? "closed" : "open"
+      status: this.bugProp.closed ? "closed" : "open",
+      newDate: this.bugProp.updatedAt
+        .substring(0, this.bugProp.updatedAt.length - 8)
+        .toString()
+        .split("T")
+        .join(" "),
+      date: moment(this.newDate, "YYYY-MM-DD HH:mm")
     };
   },
   computed: {},
