@@ -9,6 +9,7 @@
     <button @click="closeBug()">Close Bug</button>
     NOTES:
     <hr />
+
     <NoteComponent v-for="note in notes" :key="note._id" :noteProp="note" />
 
     <form @submit.prevent="createNote()">

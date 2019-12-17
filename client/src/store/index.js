@@ -72,10 +72,18 @@ export default new Vuex.Store({
 
       }
     },
-    async createContext({ commit, dispatch }, note) {
+    async createNote({ commit, dispatch }, note) {
       try {
-        let res = await api.post('notes')
+        let res = await api.post('notes', note)
         dispatch("getNotes", note.bug)
+      } catch (error) {
+
+      }
+    },
+    async removeNote({ commit, dispatch }, note) {
+      try {
+        let res = await api.delete('notes/' + note.noteId)
+        dispatch("getNotes", note.bugId)
       } catch (error) {
 
       }

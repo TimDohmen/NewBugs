@@ -1,5 +1,8 @@
 <template>
-  <div class="NoteComponent">{{noteProp.content}}</div>
+  <div class="NoteComponent">
+    <span>{{noteProp.content}}</span>
+    <button class="btn btn-danger" @click="removeNote()">remove</button>
+  </div>
 </template>
 
 
@@ -10,7 +13,14 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    removeNote() {
+      this.$store.dispatch("removeNote", {
+        noteId: this.noteProp._id,
+        bugId: this.$route.params.id
+      });
+    }
+  },
   components: {},
   props: ["noteProp"]
 };
