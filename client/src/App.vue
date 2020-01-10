@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
+      <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Bug Tracker</span>
+        <i class="fas fa-bug"></i>
+      </nav>
       <!-- <router-link to="/">Home</router-link> | -->
       <!-- <router-link to="/about">About</router-link> -->
     </div>

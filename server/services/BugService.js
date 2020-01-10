@@ -14,11 +14,11 @@ class BugService {
     return await _repository.findById(id);
   }
   async edit(id, update) {
-    let data = await _repository.findOneAndUpdate({ _id: id }, update, {
+    let data = await _repository.findOneAndUpdate({ _id: id, closed: false }, update, {
       new: true
     });
     if (!data) {
-      throw new Error("Invalid Update Id");
+      throw new Error("Invalid Update Id or Bug is already closed");
     }
     return data;
   }

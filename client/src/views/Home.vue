@@ -1,9 +1,9 @@
 <template>
   <div class="home container-fluid">
-    <header class="bg-secondary h-25 row">
-      <h3 class="col">Bug Tracker</h3>
-    </header>
+    <QuickModal v-if="isModalVisible" />
     <button @click="showInput = !showInput">Report Da Bugz</button>
+    <button @click="isModalVisible = !isModalVisible">Report Da Bugz</button>
+
     <form v-if="showInput" @submit.prevent="createBug()">
       <div class="form-group">
         <label for="name">Name</label>
@@ -46,7 +46,7 @@
         <th>Status</th>
         <th>Last Modified</th>
       </tr>
-      <BugComponent v-for="bug in bugs" :key="bug._id" :bugProp="bug" />
+      <bug-component v-for="bug in bugs" :key="bug._id" :bugProp="bug" />
     </table>
     <button @click="getBugs(--page)">Prev Page</button>
 
@@ -56,6 +56,7 @@
 
 <script>
 // @ is an alias to /src
+import QuickModal from "@/components/QuickModal.vue";
 import HelloWorld from "@/components/HelloWorld.vue";
 import BugComponent from "@/components/BugComponent.vue";
 export default {
@@ -64,12 +65,14 @@ export default {
     return {
       newBug: {},
       showInput: false,
-      page: 1
+      page: 1,
+      isModalVisible: false
     };
   },
   components: {
     HelloWorld,
-    BugComponent
+    BugComponent,
+    QuickModal
   },
   computed: {
     bugs() {
@@ -86,6 +89,12 @@ export default {
         description: this.newBug.comment,
         title: this.newBug.title
       });
+    },
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   },
   mounted() {
